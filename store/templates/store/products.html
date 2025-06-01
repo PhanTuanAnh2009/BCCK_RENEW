@@ -39,7 +39,35 @@
       </a>
     </div>
     {% empty %}
-      <p>jalksdf</p>
+       <h2>Danh Sách Sản Phẩm</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Tên Sản Phẩm</th>
+                <th>Giá</th>
+                <th>Tồn Kho</th>
+                <th>Ảnh</th>
+                <th>Hành Động</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for product in products %}
+            <tr>
+                <td>{{ product.name }}</td>
+                <td>{{ product.price }}</td>
+                <td>{{ product.stock }}</td>
+                <td>
+                    <img src="{{ product.image.url }}" alt="{{ product.name }}" width="100">
+                </td>
+                <td>
+                
+                    <a href="{% url 'delete_product' product.id %}" onclick="return confirm('Bạn có chắc chắn muốn xóa sản phẩm này?')">Xoá</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
     {% endfor %}
   </div>
 </div>

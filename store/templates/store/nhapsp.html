@@ -1,0 +1,31 @@
+
+{% extends 'store/base.html' %}
+{% load static %}
+{% block title %}
+Thêm sản phẩm 
+{% endblock title %}
+{% block content %}
+ <div id="add" class="addnew">
+        <div class="add-content">
+         
+            <h2 id="add-title">Thêm Sản Phẩm</h2>
+            <form method="POST" enctype="multipart/form-data" id="product-form">
+                {% csrf_token %}
+                <label for="name">Tên sản phẩm:</label>
+                <input type="text" id="name" name="name" required><br><br>
+
+                <label for="price">Giá sản phẩm:</label>
+                <input type="number" id="price" name="price" required><br><br>
+
+                <label for="stock">Tồn kho:</label>
+                <input type="number" id="stock" name="stock" required><br><br>
+
+                <label for="image">Hình ảnh:</label>
+                <input type="file" id="image" name="image"><br><br>
+
+                <input type="hidden" name="product_id" id="product-id">
+                <button type="submit" id="submit-button">Thêm Sản Phẩm</button>
+            </form>
+        </div>
+    </div>
+{% endblock content %}

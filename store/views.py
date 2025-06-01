@@ -132,29 +132,57 @@ def logout_view(request):
     return redirect('login_custom')
 
 
-def product(request):
-    if request.method == "POST":
+# def product(request):
+#     if request.method == "POST":
         
-        if 'product_id' in request.POST and request.POST['product_id']:
-            product_id = request.POST['product_id']
-            product = get_object_or_404(Product, id=product_id)
+#         if 'product_id' in request.POST and request.POST['product_id']:
+#             product_id = request.POST['product_id']
+#             product = get_object_or_404(Product, id=product_id)
             
-            product.name = request.POST['name']
-            product.price = request.POST['price']
-            product.stock = request.POST['stock']
-            if 'image' in request.FILES:
-                product.image = request.FILES['image']
-            product.save()
-            return redirect('product')
-        else:
+#             product.name = request.POST['name']
+#             product.price = request.POST['price']
+#             product.stock = request.POST['stock']
+#             if 'image' in request.FILES:
+#                 product.image = request.FILES['image']
+#             product.save()
+#             return redirect('product')
+#         else:
             
-            name = request.POST['name']
-            price = request.POST['price']
-            stock = request.POST['stock']
-            image = request.FILES.get('image')
-            product = Product(name=name, price=price, stock=stock, image=image)
-            product.save()
-            return redirect('product')
+#             name = request.POST['name']
+#             price = request.POST['price']
+#             stock = request.POST['stock']
+#             image = request.FILES.get('image')
+#             product = Product(name=name, price=price, stock=stock, image=image)
+#             product.save()
+#             return redirect('product')
+
+#     products = Product.objects.all()
+
+  
+#     product = Product()
+
+#     context = {
+#         'products': products,
+#         'product': product  
+#     }
+
+#     return render(request, 'store/product.html', context)
+
+
+def delete_product(request, id):
+    product = get_object_or_404(Product, id=id)
+    product.delete()
+    return redirect('product')
+
+def sanpham(request):
+    if request.method=="POST":
+        name = request.POST['name']
+        price = request.POST['price']
+        stock = request.POST['stock']
+        image = request.FILES.get('image')
+        product = Product(name=name, price=price, stock=stock, image=image)
+        product.save()
+        return redirect('sanpham')
 
     products = Product.objects.all()
 
@@ -166,11 +194,5 @@ def product(request):
         'product': product  
     }
 
-    return render(request, 'store/product.html', context)
-
-
-def delete_product(request, id):
-    product = get_object_or_404(Product, id=id)
-    product.delete()
-    return redirect('product')
+    return render(request, 'store/nhapsp.html', context)
 
