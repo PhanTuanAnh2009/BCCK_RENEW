@@ -1,0 +1,46 @@
+
+{% extends 'store/base.html' %}
+{% load static %}
+
+{% block title %}Danh sách sản phẩm{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+  <div class="row g-4">
+    {% for product in products %}
+    <div class="col-12 col-sm-6 col-lg-3 position-relative">
+      <a href="{% url 'product_detail' product.id %}" class="text-decoration-none text-dark">
+        <div class="card border-0 shadow-md text-center position-relative pt-5 hover-shadow">
+          {% if product.image %}
+            <img src="{{ product.image.url }}" alt="{{ product.name }}"
+                 class="card-img-circle mx-auto d-block position-relative bg-white">
+          {% else %}
+            <div class="card-img-circle mx-auto d-block position-relative bg-light
+                        d-flex align-items-center justify-content-center">
+              No Image
+            </div>
+          {% endif %}
+          <div class="card-body bg-success bg-opacity-10" style="min-height: 250px;">
+            <div class="mb-2">
+              {% for i in stars %}
+                {% if i <= product.rating %}
+                  <i class="bi bi-star-fill text-warning"></i>
+                {% else %}
+                  <i class="bi bi-star text-warning"></i>
+                {% endif %}
+              {% endfor %}
+            </div>
+            <h5 class="card-title">{{ product.name }}</h5>
+            <p class="mb-5 position-absolute bottom-0 start-0 end-0">
+              <span class="fw-bold text-success">{{ product.formatted_price }}</span>
+            </p>
+          </div>
+        </div>
+      </a>
+    </div>
+    {% empty %}
+      <p>jalksdf</p>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

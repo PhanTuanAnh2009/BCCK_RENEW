@@ -1,0 +1,36 @@
+
+{% extends 'store/base.html' %}
+{% load static %}
+
+{% block title %}
+Đăng nhập
+{% endblock title %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="mb-4">Đăng nhập</h2>
+
+      {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-info">{{ message }}</div>
+        {% endfor %}
+     {% endif %}
+
+     <form method="POST">
+        {% csrf_token %}
+         <div class="mb-3">
+            <label class="form-label">Tên đăng nhập</label>
+            <input type="text" name="username" class="form-control" placeholder="Nhập username" required>
+         </div>
+
+        <div class="mb-3">
+            <label class="form-label">Mật khẩu</label>
+            <input type="password" name="password" class="form-control" placeholder="Nhập password" required>
+        </div>
+
+        <button type="submit" class="btn btn-success w-100">Đăng nhập</button>
+    </form>
+    <hr>
+    <p>Bạn chưa có tài khoản? <a href="{% url 'register_custom' %}">Đăng ký</a></p>
+</div>
+{% endblock content %}

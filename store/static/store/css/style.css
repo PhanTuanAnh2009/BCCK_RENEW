@@ -1,0 +1,75 @@
+body {
+  background-color: #f3f0f1;
+}
+
+
+/* file: style.css */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background: #f7f7f7;
+}
+
+
+header.navbar {
+  height: 80px;
+  overflow: hidden;
+}
+/* footer {
+  max-height: 300px;
+  overflow-y: auto;
+} */
+
+.card-img-circle {
+  width: 140px;
+  height: 140px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-top: -70px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.card-img-circle {
+  width: 140px;        /* hoặc kích thước bạn mong muốn */
+  height: 140px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-top: -70px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+/* Nếu là ảnh lớn ở trang chi tiết, thêm */
+.product-detail-img {
+  max-width: 100%;     /* không tràn cột */
+  height: auto;        /* giữ tỉ lệ */
+  max-height: 400px;   /* cắt chiều cao nếu quá dài */
+  object-fit: contain; /* hoặc cover tuỳ ý */
+}
+
+
+.product-description {
+  max-height: 100px;      /* chiều cao tối đa */
+  overflow-y: auto;       /* cuộn dọc khi nội dung vượt */
+  padding-right: 0.5rem;  /* tránh text dính sát thanh cuộn */
+}
+
+.dot {
+  height: 8px;
+  width: 8px;
+  margin: 0 5px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.3s;
+}
+
+.dot.active {
+  background-color: #333;
+}
+
+.img-fluid {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
