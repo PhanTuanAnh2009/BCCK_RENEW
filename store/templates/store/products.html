@@ -6,7 +6,8 @@
 
 {% block content %}
 
-  
+<div class="container py-5">
+  <div class="row g-4">
        <h2>Danh Sách Sản Phẩm</h2>
     <table>
         <thead>
@@ -19,24 +20,25 @@
             </tr>
         </thead>
         <tbody>
-            {% for product in Products %}
+            {% for i in products %}
             <tr>
-                <td>{{ product.name }}</td>
-                <td>{{ product.price }}</td>
-                <td>{{ product.stock }}</td>
+                <td>{{ i.name }}</td>
+                <td>{{ i.price }}</td>
+                <td>{{ i.stock }}</td>
                 <td>
-                    <img src="{{ product.image.url }}" alt="{{ product.name }}" width="100">
+                    <img src="{{ i.image.url }}" alt="{{ i.name }}" width="100">
                 </td>
                 <td>
                 
-                    <a href="{% url 'delete_product' product.id %}" onclick="return confirm('Bạn có chắc chắn muốn xóa sản phẩm này?')">Xoá</a>
+                    <a href="{% url 'delete_i' i.id %}" onclick="return confirm('Bạn có chắc chắn muốn xóa sản phẩm này?')">Xoá</a>
                 </td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
 
-    {% endfor %}
+    </div>
+    </div>
   </div>
 </div>
 {% endblock %}
