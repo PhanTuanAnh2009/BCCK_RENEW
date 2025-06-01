@@ -33,22 +33,12 @@ class CustomUser(models.Model):
         return self.username
 
 
-class Products(models.Model):
+
+    
+class Sanpham(models.Model):
     name = models.CharField("Tên sản phẩm", max_length=200)
     description = models.TextField("Mô tả", blank=True)
     price = models.DecimalField("Giá bán", max_digits=10, decimal_places=0)
-    # rating từ 0 đến 5
-    rating = models.PositiveSmallIntegerField("Sao đánh giá",
-        default=0,
-        choices=[(i, f"{i} sao") for i in range(6)]
-    )
-    #cài pillow: pip install pillow
-    image = models.ImageField("Ảnh sản phẩm",
-                              upload_to="products/",
-                              blank=True, null=True)
-
-    created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.name
-# Create your models here.
