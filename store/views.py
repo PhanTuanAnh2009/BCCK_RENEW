@@ -6,14 +6,14 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 import locale
-from .models import CustomUser,Products
+from .models import CustomUser
 
 
 locale.setlocale(locale.LC_ALL, 'vi_VN.UTF-8')
 
 
 def add_to_cart(request, product_id):
-    product = get_object_or_404(Products, id=product_id)
+    product = get_object_or_404(Product, id=product_id)
     quantity = int(request.POST.get("quantity", 1))
 
     cart = request.session.get('cart', [])
@@ -35,7 +35,7 @@ def add_to_cart(request, product_id):
 
 
 def product_list(request):
-    products = Products.objects.all()
+    products = Product.objects.all()
     for p in products:
         formatted = locale.currency(p.price, grouping=True)
         print(formatted)
@@ -194,5 +194,5 @@ def sanpham(request):
         'product': product  
     }
 
-    return render(request, 'store/nhapsp.html', context)
+    return render(request, 'store/products.html', context)
 
