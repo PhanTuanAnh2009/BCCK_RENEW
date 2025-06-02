@@ -6,23 +6,35 @@
 
 {% block content %}
 
-
-       <h2>Danh Sách Sản Phẩm</h2>
+        <div style="display:flex; flex-direction: column; align-items: center; margin-bottom:50px;">
+       <h2 >Danh Sách Sản Phẩm</h2>
+       <div>
+       <form method="POST" enctype="multipart/form-data" id="product-form">
+        
+            {% csrf_token %}
+       
+<input type="text" id="name" name="search" placeholder="Search"  style="border-radius: 5px;border:2px solid black;"required>
+ <button style="border:2p solid black ;border-radius:5px; background-color: aqua; color:white; height:30px; border-radius:2px;"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+  <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
+</svg></button>
+</div>
+</div>
         <div class="product-container">
             {% for i in products %}
-           <div class="product-card">
+           <div class="product-card" style="border:2px solid black;">
             <img src="{{i.image.url}}" alt="{{i.name}}" >
             <div class="product-info">
-                <h3>Intel Pentium</h3>
-                <p class="price">Price: $999</p>
+                <h3>{{i.name}}</h3>
+                <p class="price">Price: {{i.price}}$</p>
                 <div class="buttons">
                     <button class="btn details-btn">Details</button>
                     <button class="btn add-cart-btn">Add cart</button>
                 </div>
             </div>
+            <p style="text-align: right;color:red;">Stock: {{i.stock}}</p>
         </div>
-        </div>
+        
             {% endfor %}
-    
+    </div>
 
 {% endblock %}
