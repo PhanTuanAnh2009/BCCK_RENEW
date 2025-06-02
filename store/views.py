@@ -194,5 +194,5 @@ def sanpham(request):
         'product': product  
     }
 
-    return render(request, 'store/products.html', context)
+    return render(request, 'store/nhapsp.html', context)
 

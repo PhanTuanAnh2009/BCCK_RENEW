@@ -6,39 +6,23 @@
 
 {% block content %}
 
-<div class="container py-5">
-  <div class="row g-4">
-       <h2>Danh Sách Sản Phẩm</h2>
-    <table>
-        <thead>
-            <tr>
-                <th>Tên Sản Phẩm</th>
-                <th>Giá</th>
-                <th>Tồn Kho</th>
-                <th>Ảnh</th>
-                <th>Hành Động</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for i in products %}
-            <tr>
-                <td>{{ i.name }}</td>
-                <td>{{ i.price }}</td>
-                <td>{{ i.stock }}</td>
-                <td>
-                    <img src="{{ i.image.url }}" alt="{{ i.name }}" width="100">
-                </td>
-                <td>
-                
-                    <a onclick="return confirm('Bạn có chắc chắn muốn xóa sản phẩm này?')">Xoá</a>
-                </td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
 
-    </div>
-    </div>
-  </div>
-</div>
+       <h2>Danh Sách Sản Phẩm</h2>
+        <div class="product-container">
+            {% for i in products %}
+           <div class="product-card">
+            <img src="{{i.image.url}}" alt="{{i.name}}" >
+            <div class="product-info">
+                <h3>Intel Pentium</h3>
+                <p class="price">Price: $999</p>
+                <div class="buttons">
+                    <button class="btn details-btn">Details</button>
+                    <button class="btn add-cart-btn">Add cart</button>
+                </div>
+            </div>
+        </div>
+        </div>
+            {% endfor %}
+    
+
 {% endblock %}
