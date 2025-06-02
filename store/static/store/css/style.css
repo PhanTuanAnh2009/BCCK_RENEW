@@ -3,7 +3,7 @@ body {
 }
 
 
-/* file: style.css */
+
 body {
   font-family: Arial, sans-serif;
   margin: 0;
@@ -16,10 +16,7 @@ header.navbar {
   height: 80px;
   overflow: hidden;
 }
-/* footer {
-  max-height: 300px;
-  overflow-y: auto;
-} */
+
 
 .card-img-circle {
   width: 140px;
@@ -31,7 +28,7 @@ header.navbar {
 }
 
 .card-img-circle {
-  width: 140px;        /* hoặc kích thước bạn mong muốn */
+  width: 140px;        
   height: 140px;
   object-fit: cover;
   border-radius: 50%;
@@ -39,19 +36,19 @@ header.navbar {
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
 
-/* Nếu là ảnh lớn ở trang chi tiết, thêm */
+
 .product-detail-img {
-  max-width: 100%;     /* không tràn cột */
-  height: auto;        /* giữ tỉ lệ */
-  max-height: 400px;   /* cắt chiều cao nếu quá dài */
-  object-fit: contain; /* hoặc cover tuỳ ý */
+  max-width: 100%;  
+  height: auto;     
+  max-height: 400px;   
+  object-fit: contain; 
 }
 
 
 .product-description {
-  max-height: 100px;      /* chiều cao tối đa */
-  overflow-y: auto;       /* cuộn dọc khi nội dung vượt */
-  padding-right: 0.5rem;  /* tránh text dính sát thanh cuộn */
+  max-height: 100px;  
+  overflow-y: auto;     
+  padding-right: 0.5rem; 
 }
 
 .dot {
@@ -177,4 +174,82 @@ header.navbar {
     .product-card img {
         height: 150px; 
     }
+}
+.add-content {
+    background-color: #f9f9f9;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    margin: 40px auto; 
+    font-family: Arial, sans-serif;
+    color: #333;
+}
+
+.add-content h2 {
+    text-align: center;
+    color: #0056b3;
+    margin-bottom: 25px;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.add-content label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #555;
+    font-size: 16px;
+}
+
+.add-content input[type="text"],
+.add-content input[type="number"],
+.add-content input[type="file"] {
+    width: calc(100% - 20px); 
+    padding: 12px 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    box-sizing: border-box; 
+    transition: border-color 0.3s ease;
+}
+
+.add-content input[type="text"]:focus,
+.add-content input[type="number"]:focus,
+.add-content input[type="file"]:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+.add-content input[type="file"] {
+    padding: 10px;
+}
+
+.add-content button {
+    background-color: #007bff;
+    color: white;
+    padding: 15px 25px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
+    width: 100%;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.add-content button:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+}
+
+.add-content button:active {
+    background-color: #004085;
+    transform: translateY(0);
+}
+
+
+.add-content input[type="hidden"] {
+    display: none;
 }
