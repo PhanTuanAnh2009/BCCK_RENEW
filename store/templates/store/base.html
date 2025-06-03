@@ -15,26 +15,26 @@
 </head>
 <body class="d-flex flex-column min-vh-100">
   
-  <!-- HEADER chung -->
+  
   <header>
     <nav class="navbar navbar-expand-lg bg-white border-bottom">
       <div class="container-fluid px-4">
-        <!-- Phần menu -->
-        <a class="navbar-brand fw-bold bg-dark text-white px-2 py-1 rounded" href="{% url 'product_list' %}">B</a>
+        
+        <a class="navbar-brand fw-bold bg-dark text-white px-2 py-1 rounded" href="#">B</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
           <span class="navbar-toggler-icon"></span>
         </button>
     
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
-            <li class="nav-item"><a class="nav-link" href="{% url 'product_list' %}">Home</a></li>
-            <li class="nav-item"><a class="nav-link" href="#">Features</a></li>
-            <li class="nav-item"><a class="nav-link" href="#">Pricing</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'sanpham' %}"">Features</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'product_list' %}">Shop</a></li>
             <li class="nav-item"><a class="nav-link" href="#">FAQs</a></li>
             <li class="nav-item"><a class="nav-link" href="#">About</a></li>
             
           </ul>
-          <!-- Login / Logout -->
+          
           <div class="ms-auto d-flex align-items-center">
             {% if request.session.user_id %}
               <div class="dropdown">
