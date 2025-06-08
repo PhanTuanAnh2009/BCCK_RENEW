@@ -35,7 +35,11 @@ def add_to_cart(request, product_id):
 
 
 def product_list(request):
-    products = Product.objects.all()
+    keyword = request.GET.get('q', '').strip()
+    if keyword:
+        products = Product.objects.filter(name__icontains=keyword)
+    else:
+        products = Product.objects.all()
     for p in products:
         formatted = locale.currency(p.price, grouping=True)
         print(formatted)
