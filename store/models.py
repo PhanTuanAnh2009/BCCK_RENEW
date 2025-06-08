@@ -23,6 +23,7 @@ class CustomUser(models.Model):
     password = models.CharField(max_length=255)  
     email = models.EmailField()
 
+
     def set_password(self, raw_password):
         self.password = hash_password(raw_password)
 
