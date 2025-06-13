@@ -12,7 +12,11 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'store/css/style.css' %}">
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
-</head>
+  <link
+  rel="stylesheet"
+  href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@400;500&display=swap"
+/>
+  </head>
 <body class="d-flex flex-column min-vh-100">
   
   
@@ -28,7 +32,7 @@
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
             <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
-            <li class="nav-item"><a class="nav-link" href="{% url 'sanpham' %}"">Features</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">Features</a></li>
             <li class="nav-item"><a class="nav-link" href="{% url 'product_list' %}">Shop</a></li>
             <li class="nav-item"><a class="nav-link" href="#">FAQs</a></li>
             <li class="nav-item"><a class="nav-link" href="#">About</a></li>
@@ -44,6 +48,7 @@
                 <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark">
                   <li><a class="dropdown-item" href="#">Hồ sơ</a></li>
                   <li><a class="dropdown-item" href="#">Cài đặt</a></li>
+                  <li><a class="dropdown-item" href="{% url 'sanpham' %}">Thêm sản phẩm</a></li>
                   <li><hr class="dropdown-divider"></li>
                   <li><a class="dropdown-item" href="{% url 'logout_custom' %}">Đăng xuất</a></li>
                 </ul>

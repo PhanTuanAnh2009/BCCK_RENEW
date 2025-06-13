@@ -183,6 +183,7 @@ def sanpham(request):
         name = request.POST['name']
         price = request.POST['price']
         stock = request.POST['stock']
+
         image = request.FILES.get('image')
         product = Product(name=name, price=price, stock=stock, image=image)
         product.save()

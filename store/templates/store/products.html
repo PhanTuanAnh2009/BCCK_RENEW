@@ -15,24 +15,25 @@
                 name="q"
                 placeholder="Tìm kiếm sản phẩm..."
                 value="{{ request.GET.q|default:'' }}"
+                style="width:260px;"
             >
-            <button type="submit">Tìm</button>
+            <button type="submit" style="border:none;background-color: aqua;color:white;padding:2px; border-radius:2px;">Tìm</button>
         </form>
     </div>
 </div>
-        <div class="product-container">
+        <div class="product-container" style="height:100%;">
             {% for i in products %}
-           <div class="product-card" style="border:2px solid black;height:100%">
+           <div class="product-card" style="border:2px solid black;height:100%; ">
             <img src="{{i.image.url}}" alt="{{i.name}}" >
             <div class="product-info">
-                <h3>{{i.name}}</h3>
-                <p class="price">Gía: {{i.price}} đồng</p>
+                <h3 >{{i.name}}</h3>
+                <p class="price">Gía: {{i.formatted_price}} đồng</p>
                 <div class="buttons">
                     <button class="btn details-btn">Chi tiết</button>
                     <button class="btn add-cart-btn">Thêm vào</button>
                 </div>
             </div>
-            <p style="text-align: right;color:red;">Số lượng: {{i.stock}}</p>
+
         </div>
         {% empty %}
       <p>Chưa có sản phẩm nào.</p>
