@@ -177,13 +177,14 @@ def delete_product(request, id):
     product = get_object_or_404(Product, id=id)
     product.delete()
     return redirect('product')
-
+def descrip(request):
+        return render(request, 'store/descrip.html')
 def sanpham(request):
     if request.method=="POST":
         name = request.POST['name']
         price = request.POST['price']
         stock = request.POST['stock']
-
+        # descrip=request.POST['descrip']
         image = request.FILES.get('image')
         product = Product(name=name, price=price, stock=stock, image=image)
         product.save()
