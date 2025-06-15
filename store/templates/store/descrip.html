@@ -6,7 +6,7 @@
 
 {% block content %}
 
-<div class="container" style="display:flex;flex-direction: row;margin-top:20px;">
+<div class="container" style="display:flex;flex-direction: row;margin-top:20px; ">
     <div class="con1" style="margin-right:100px;" >
     <img src="{{product.image.url}}" alt="{{product.name}}" style="width:400px;border:2px solid black;">
     </div>
@@ -15,12 +15,16 @@
         <h2 style="color:red">{{formatted_price}}</h2>
         <div class="btt" style="display:flex;flex-direction: row">
             
-            <button style="margin-right:30px;width:175px;height:48px;border-color:red">Them vao gio hang </button>
+            <button style="margin-right:30px;width:175px;height:48px;border-color:black;border-radius:2px;box-shadow:2px 2px rgba(0,0,0,0.6)">Thêm vào giỏ hàng </button>
 
-         <button style="width:140px;height:48px;border:none;">Mua ngay </button>
+         <button style="width:140px;height:48px;border-color:white;border-width: 2px;background-color: black;color:white;border-radius:2px;box-shadow: 2px 2px rgba(0,0,0,0.6)">Mua ngay </button>
             
         </div>
     </div>
+</div>
+<div class="mota">
+    <h1 style="margin-left:80px;">Mô tả sản phẩm </h1>
+    <p>{{product.descrip}}</p>
 </div>
 
 {% endblock %}
