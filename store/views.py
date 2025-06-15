@@ -177,7 +177,7 @@ def delete_product(request, id):
     product = get_object_or_404(Product, id=id)
     product.delete()
     return redirect('product')
-def descrip(request):
+def product_detail(request):
         return render(request, 'store/descrip.html')
 def sanpham(request):
     if request.method=="POST":
