@@ -2,29 +2,11 @@
 {% extends 'store/base.html' %}
 {% load static %}
 
-{% block title %}Danh sách sản phẩm{% endblock %}
+{% block title %}{{product.name}}{% endblock %}
 
 {% block content %}
+<h1>{{product.name}}</h1>
 
-        <div class="product-container" style="height:100%;">
-            {% for i in products %}
-           <div class="product-card" style="border:2px solid black;height:100%; ">
        
-            <img src="{{i.image.url}}" alt="{{i.name}}" >
-            <div class="product-info">
-                <h3 >{{i.name}}</h3>
-                <p class="price">Gía: {{i.formatted_price}} đồng</p>
-                <div class="buttons">
-                    <a href="{% url 'descrip' %}"><button class="btn details-btn">Chi tiết</button></a>
-                    <button class="btn add-cart-btn">Thêm vào</button>
-                </div>
-            </div>
-
-        </div>
-        {% empty %}
-      <p>Chưa có sản phẩm nào.</p>
-            {% endfor %}
-           
-    </div>
 
 {% endblock %}

@@ -30,7 +30,7 @@
                 <h3 >{{i.name}}</h3>
                 <p class="price">Gía: {{i.formatted_price}} đồng</p>
                 <div class="buttons">
-                    <a href="{% url 'product' i.id %}"><button class="btn details-btn">Chi tiết</button></a>
+                    <a href="{% url 'product_detail' i.id %}"><button class="btn details-btn">Chi tiết</button></a>
                     <button class="btn add-cart-btn">Thêm vào</button>
                 </div>
             </div>

@@ -12,26 +12,26 @@ from .models import CustomUser
 locale.setlocale(locale.LC_ALL, 'vi_VN.UTF-8')
 
 
-def add_to_cart(request, product_id):
-    product = get_object_or_404(Product, id=product_id)
-    quantity = int(request.POST.get("quantity", 1))
+# def add_to_cart(request, product_id):
+#     product = get_object_or_404(Product, id=product_id)
+#     quantity = int(request.POST.get("quantity", 1))
 
-    cart = request.session.get('cart', [])
-    cart.append({
-        "id": product.id,
-        "name": product.name,
-        "price": int(product.price),
-        "image_url":product.image.url,
-        "quantity": quantity,
-    })
-    request.session['cart'] = cart
+#     cart = request.session.get('cart', [])
+#     cart.append({
+#         "id": product.id,
+#         "name": product.name,
+#         "price": int(product.price),
+#         "image_url":product.image.url,
+#         "quantity": quantity,
+#     })
+#     request.session['cart'] = cart
 
   
-    notifications = request.session.get('notifications', [])
-    notifications.insert(0, f"Bạn đã thêm '{product.name}' vào giỏ hàng.")
-    request.session['notifications'] = notifications[:5]  # giữ 5 dòng mới nhất
+#     notifications = request.session.get('notifications', [])
+#     notifications.insert(0, f"Bạn đã thêm '{product.name}' vào giỏ hàng.")
+#     request.session['notifications'] = notifications[:5]  # giữ 5 dòng mới nhất
 
-    return redirect('product_detail', product_id=product.id)
+#     return redirect('product_detail', product_id=product.id)
 
 
 def product_list(request):
@@ -47,7 +47,7 @@ def product_list(request):
             formatted = formatted.replace(',00 ₫', ' ₫')
         p.formatted_price = formatted
 
-    stars = range(1, 6)   # 1,2,3,4,5
+    stars = range(1, 6)   
     return render(request, 'store/products.html', {
         'products': products,
         'stars': stars,
@@ -177,8 +177,15 @@ def delete_product(request, id):
     product = get_object_or_404(Product, id=id)
     product.delete()
     return redirect('product')
-def product_detail(request):
-        return render(request, 'store/descrip.html')
+def product_detail(request,product_id):
+    product = get_object_or_404(Product, id=product_id)
+    formatted = locale.currency(product.price, grouping=True)
+
+    
+    return render(request, 'store/descrip.html', {
+        'product': product,
+        'formatted_price': formatted,
+    })
 def sanpham(request):
     if request.method=="POST":
         name = request.POST['name']
@@ -202,14 +209,14 @@ def sanpham(request):
 
     return render(request, 'store/nhapsp.html', context)
 
-def timKiem(request)  :
-    keyword = request.GET.get('q', '').strip()
+# def timKiem(request)  :
+#     keyword = request.GET.get('q', '').strip()
 
-    if keyword:
-        products = Product.objects.filter(name__icontains=keyword)
-    else:
-        products = Product.objects.all()
+#     if keyword:
+#         products = Product.objects.filter(name__icontains=keyword)
+#     else:
+#         products = Product.objects.all()
 
-    return render(request, 'products.html', {
-        'products': products,
-    })
+#     return render(request, 'products.html', {
+#         'products': products,
+#     })
