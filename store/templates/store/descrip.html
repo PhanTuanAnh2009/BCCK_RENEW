@@ -6,11 +6,12 @@
 
 {% block content %}
 
-<div class="container" style="display:flex;flex-direction: row;margin-top:20px; ">
-    <div class="con1" style="margin-right:100px;" >
-    <img src="{{product.image.url}}" alt="{{product.name}}" style="height:200px;border:2px solid black;">
+<div class="container">
+    <div class="row">
+    <div class="col-md-5" style="margin-right:100px;" >
+    <img src="{{product.image.url}}" alt="{{product.name}}" style="width:400px;border:2px solid black;">
     </div>
-    <div class="con2" style="max-height: 200px;">
+    <div class="col-md-7" style="max-height: 200px;">
         <h2 >{{product.name}}</h2>
         <h2 style="color:red">{{formatted_price}}</h2>
         <div class="btt" style="display:flex;flex-direction: row">
@@ -21,6 +22,7 @@
             
         </div>
     </div>
+</div>
 </div>
 <div class="mota">
     <h1 style="margin-left:80px;">Mô tả sản phẩm </h1>
