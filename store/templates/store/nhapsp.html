@@ -21,7 +21,15 @@ Thêm sản phẩm
                 <input type="number" id="stock" name="stock" required><br><br>
                 
                 <label for="descrip">Mô tả sản phẩm:</label>
-                <input type="text" id="descrip" name="descrip" style="overflow-y: scroll; height:200px;" required><br><br>
+                <textarea id="descrip" name="descrip" style="width: calc(100% - 20px); 
+    padding: 12px 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    box-sizing: border-box; 
+    transition: border-color 0.3s ease;overflow-y: scroll; overflow-x: hidden; height: 200px; width: 100%;" required></textarea>
+<br><br>
 
                 <label for="image">Hình ảnh:</label>
                 <input type="file" id="image" name="image"><br><br>

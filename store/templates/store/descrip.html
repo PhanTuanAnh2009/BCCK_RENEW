@@ -8,12 +8,12 @@
 
 <div class="container mt-3">
   <div class="row">
-    <div class="col-7 col-sm-6 col-md-5">
+    <div class=" col-sm-6 col-md-5">
      <div class="card">
         <img src="{{product.image.url}}" alt="{{product.name}}" style="height:300px;">
      </div>
     </div>
-    <div class="col-5 col-sm-6 col-md-7">
+    <div class=" col-sm-6 col-md-7">
       <h2>{{product.name}}</h2>
       <h3 style="color:red;">{{formatted_price}}</h3>
       
@@ -21,11 +21,13 @@
         
 <a href="#" class="btn btn-success mt-2" style="background-color:black;">Thêm vào giỏ hàng</a>
         
-      <h3>Thong tin san pham</h3>
-      <p>{{product.descrip}}</p>
       
     </div>
   
   </div>
+</div>
+<div style="margin-left:5px;">
+<h3 style="margin-top:10px;">Thông tin sản phẩm</h3>
+<p>{{product.descrip}}</p>
 </div>
 {% endblock %}
