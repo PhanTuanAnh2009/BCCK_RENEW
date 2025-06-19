@@ -5,3 +5,4 @@ function showAlert(name) {
 }
 
 
+const chatbot=document.querySelector("#chatbot")
