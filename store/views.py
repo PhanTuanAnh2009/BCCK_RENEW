@@ -186,6 +186,9 @@ def product_detail(request,product_id):
         'product': product,
         'formatted_price': formatted,
     })
+def home(request):
+    return render(request, 'store/index.html')
+
 def sanpham(request):
     if request.method=="POST":
         name = request.POST['name']

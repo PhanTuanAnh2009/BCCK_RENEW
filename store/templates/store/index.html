@@ -14,53 +14,121 @@
     <script src="{%static 'store/js/script.js'%}" defer></script>
   </head>
   <body class="d-flex flex-column min-vh-100">
-    {% comment %} <img width="100%" src="{%static 'img/banner.png'%}" alt="" /> {% endcomment %}
-   
-    <header>
-      <nav class="navbar navbar-expand-lg bg-white border-bottom">
-        <div class="container-fluid px-4">
-          <a class="navbar-brand fw-bold bg-dark text-white px-2 py-1 rounded" href="#">B</a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-      
-          <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
-              <li class="nav-item">
-                <a class="nav-link active text-primary" href="#">Home</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="{% url 'nhapsp' %}">Features</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="{% url 'product_list' %}">Shop</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">FAQs</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">About</a>
-              </li>
-            </ul>
-            <div class="d-flex">
-              {% if request.session.user_id %}
-                <p>Xin chào {{ request.session.username }}! 
-                  <a class="btn btn-primary" href="{% url 'logout_custom' %}">Đăng xuất</a>
-                </p>
-              {% else %}
-                <a class="btn btn-outline-primary me-2" href="{% url 'login_custom' %}">Đăng nhập</a> | 
-                <a class="btn btn-primary" href="{% url 'register_custom' %}">Đăng ký</a>
-              {% endif %}
-              {% comment %} <a class="btn btn-outline-primary me-2" href="#">Login</a>
-              <a class="btn btn-primary" href="#">Sign-up</a> {% endcomment %}
-            </div>
-          </div>
-        </div>
-      </nav>
-    </header>
 
-    <main class="flex-grow-1">
-      <!-- Bạn có thể đặt nội dung trang tại đây -->
+       {% comment %} <img width="100%" src="{%static 'img/banner.png'%}" alt="" /> {% endcomment %}
+   
+  <header>
+    <nav class="navbar navbar-expand-lg bg-white border-bottom">
+      <div class="container-fluid px-4">
+        
+        <a class="navbar-brand fw-bold bg-dark text-white px-2 py-1 rounded" href="#">B</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+    
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+            <li class="nav-item"><a class="nav-link" href="{% url 'home' %}">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">Features</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'product_list' %}">Shop</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">FAQs</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">About</a></li>
+            
+          </ul>
+          
+          <div class="ms-auto d-flex align-items-center">
+            {% if request.session.user_id %}
+              <div class="dropdown">
+                <button class="btn btn-dark dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Xin chào {{ request.session.username }}
+                </button>
+                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark">
+                  <li><a class="dropdown-item" href="#">Hồ sơ</a></li>
+                  <li><a class="dropdown-item" href="#">Cài đặt</a></li>
+                  <li><a class="dropdown-item" href="{% url 'sanpham' %}">Thêm sản phẩm</a></li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li><a class="dropdown-item" href="{% url 'logout_custom' %}">Đăng xuất</a></li>
+                </ul>
+              </div>
+              <!-- Icon chuông thông báo -->
+              {% comment %} <a href="#" class="btn btn-light position-relative me-3">
+                <i class="bi bi-bell"></i>
+                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                  {{ request.session.notifications|length|default:"0" }}
+                </span>
+              </a> {% endcomment %}
+              <div class="dropdown me-3">
+                <a class="btn btn-light position-relative" href="#" role="button" data-bs-toggle="dropdown">
+                  <i class="bi bi-bell"></i>
+                  <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                    {{ request.session.notifications|length|default:"0" }}
+                  </span>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end shadow" style="width: 300px; max-height: 400px; overflow-y: auto;">
+                  {% for note in request.session.notifications %}
+                    <li class="dropdown-item small d-flex gap-2" style="white-space: normal; word-break: break-word;">
+                      <i class="bi bi-chat-dots text-primary mt-1"></i> 
+                      <span>{{ note }}</span>
+                    </li>
+                    <li><hr class="dropdown-divider"></li>
+                  {% empty %}
+                    <li class="dropdown-item text-muted">Không có thông báo nào</li>
+                  {% endfor %}
+                </ul>                
+              </div>
+              
+
+              <!-- Icon giỏ hàng -->
+              <a href="#" class="btn btn-light position-relative me-3" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart">
+                <i class="bi bi-cart"></i>
+                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-success">
+                  {{ request.session.cart|length|default:"0" }}
+                </span>
+              </a>
+
+            {% else %}
+              <a class="btn btn-outline-primary me-2" href="{% url 'login_custom' %}">Đăng nhập</a>
+              <a class="btn btn-primary" href="{% url 'register_custom' %}">Đăng ký</a>
+            {% endif %}
+          </div>
+          
+        </div>
+      </div>
+    </nav>
+    <!-- Offcanvas giỏ hàng -->
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasCart" aria-labelledby="offcanvasCartLabel">
+      <div class="offcanvas-header">
+        <h5 id="offcanvasCartLabel">Giỏ hàng</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+      </div>
+      
+    </div>
+
+  </header>
+   <main class="flex-grow-1">
+      <div id="homeCarousel" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-inner">
+    <!-- Ảnh 1 -->
+    <div class="carousel-item active">
+      <img src="image1.jpg" class="d-block w-100" alt="Ảnh 1">
+    </div>
+    <!-- Ảnh 2 -->
+    <div class="carousel-item">
+      <img src="image2.jpg" class="d-block w-100" alt="Ảnh 2">
+    </div>
+    <!-- Ảnh 3 -->
+    <div class="carousel-item">
+      <img src="image3.jpg" class="d-block w-100" alt="Ảnh 3">
+    </div>
+  </div>
+
+  <!-- Nút điều hướng -->
+  <button class="carousel-control-prev" type="button" data-bs-target="#homeCarousel" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#homeCarousel" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+  </button>
        
     </main>
     

@@ -13,7 +13,7 @@
         <img src="{{product.image.url}}" alt="{{product.name}}" style="height:300px;">
      </div>
     </div>
-    <div class=" col-md-7">
+    <div class=" col-md-7 position-relative">
       
       <h2>{{product.name}}</h2>
       <h3 style="color:red;">{{formatted_price}}</h3>
@@ -25,7 +25,7 @@
 <a href="#" class="btn btn-success mt-2" style="color:black;background-color:white;border:2px solid black;">Mua ngay</a>
         
 <a href="#" class="btn btn-success mt-2" style="background-color:black;">Thêm vào giỏ hàng</a>
-         <p style="color:grey;text-align: right;margin-top:2px;">Tồn hàng:{{product.stock}}</p>
+         <p style="color:grey;position: absolute; bottom: 0; right: 0; margin: 0;">Tồn hàng:{{product.stock}}</p>
      
     </div>
   
