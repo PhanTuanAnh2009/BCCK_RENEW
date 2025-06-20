@@ -77,12 +77,14 @@ header.navbar {
   gap: 20px; 
     margin-bottom:30px;
     align-items: center; 
+    
 }
 .product-container a{
     text-decoration: none;
 }
 
 .product-card {
+  
    width: 250px;
   background: white;
   border-radius: 8px;
@@ -90,6 +92,12 @@ header.navbar {
   overflow: hidden;
   position: relative;
     margin: auto;
+
+
+
+
+
+
 }
 .product-card:hover {
   transform: translateY(-5px) scale(1.03);
@@ -429,4 +437,5 @@ box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
   padding: 10px 15px;
   border: none;
   cursor: pointer;
+    
 }
