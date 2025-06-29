@@ -78,14 +78,14 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 DATABASES = {
     'default': {
         # 'ENGINE': 'django.db.backends.sqlite3',
-        'ENGINE': 'django.db.backends.mysql',
+        'ENGINE': 'django.db.backends.postgresql',
         # 'NAME': BASE_DIR / 'db.sqlite3',
 
-        'NAME':'store_new',
-        'USER':'root',
-        'PASSWORD':'',
-        'HOST':'localhost',
-        'PORT': '3306',  # Đảm bảo có PORT
+        'NAME':'store_db_0rpj',
+        'USER':'store_db_0rpj_user',
+        'PASSWORD':'LRp62S3GtTAS2bELYPU0UtrPuJHLVhwO',
+        'HOST':'dpg-d1ggkqqli9vc73aklppg-a.oregon-postgres.render.com',
+        'PORT': '5432',  # Đảm bảo có PORT
     }
 }
 
