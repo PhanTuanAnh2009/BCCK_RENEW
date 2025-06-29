@@ -28,7 +28,7 @@
 </div>
         <div class="product-container" style="max-height:500px;">
             {% for i in products %}
-           <a href="{% url 'product_detail' i.id %}"><div class="product-card" style=height:100%; >
+           <a href="{% url 'product_detail' i.id %}"><div class="product-card" style="height:100%;max-width:400px;" >
             
             <img class="ratio ratio-1x1" src="{{i.image.url}}" alt="{{i.name}}" class="ratio ratio-1x1">
            
