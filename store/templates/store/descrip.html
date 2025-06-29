@@ -17,8 +17,7 @@
       
       <h2>{{product.name}}</h2>
       <h3 style="color:red;">{{formatted_price}}</h3>
-      <!-- <form method="post" action="{% url 'themvaogiohang' product.id %}">
-        {% csrf_token %} -->
+    
       <div class="d-flex align-items-center gap-3 mb-2">
   
   <label for="quantity" class="mb-0">Số Lượng</label>
@@ -31,7 +30,7 @@
 <a href="#"  class="btn btn-success mt-2" style="color:black;background-color:white;border:2px solid black;">Mua ngay</a>
         
 <a href="#"  class="btn btn-success mt-2" style="background-color:black;padding:10px;">Thêm vào giỏ hàng</a>
-<!-- </form> -->
+
 <p style="color:grey;position: absolute; bottom: 0; right: 0; margin: 0;">Tồn hàng:{{product.stock}}</p>
 
     </div>
