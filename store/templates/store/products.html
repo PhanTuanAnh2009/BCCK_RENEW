@@ -29,8 +29,9 @@
         <div class="product-container" style="height:100%;">
             {% for i in products %}
            <a href="{% url 'product_detail' i.id %}"><div class="product-card" style=height:100%; ">
-       
-            <img src="{{i.image.url}}" alt="{{i.name}}" >
+            
+            <img src="{{i.image.url}}" alt="{{i.name}}" class="ratio ratio-1x1">
+           
             <div class="product-info">
                 <h3 >{{i.name}}</h3>
                 <p class="price">Gía: {{i.formatted_price}} đồng</p>
