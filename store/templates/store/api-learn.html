@@ -1,0 +1,36 @@
+
+{% extends 'store/base.html' %}
+{% load static %}
+
+{% block title %}Danh sách sản phẩm{% endblock %}
+
+{% block content %}
+<h2>Danh sach san pham</h2>
+<div id="product-list" class="product-container">
+
+</div>
+<script>
+    function loadProduct(){
+        fetch('/api/products/')
+        .then(response=>response.json())
+        .then(data=>{
+            let html=''
+            data.forEach(item=>{
+                html+=`
+                    <div class="product-card">
+                        <img src="${item.image}" style="border:2px solid black; height:100px; object-fit:cover;border-radius:2px;">    
+                        <h2>${item.name}<h2>
+                        <h3>${item.price}</h3>
+                        <p>${item.stock}</p>
+                        <button id="fix-product">Sua</button>
+                        <button id="del-product">Xoa </button>
+                        </div>
+                `
+            })
+            document.getElementById('product-list').innerHTML=html;
+        })
+    }
+    loadProduct()
+</script>
+{% endblock %}
+"

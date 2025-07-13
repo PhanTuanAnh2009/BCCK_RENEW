@@ -7,7 +7,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 import locale
 from .models import CustomUser
-
+from django.http import JsonResponse
 
 locale.setlocale(locale.LC_ALL, 'vi_VN.UTF-8')
 
@@ -55,7 +55,21 @@ def product_list(request):
 
 
 
-
+def index_api(request):
+    return render(request,'store/api-learn.html')
+def product_list_api(request):
+    products=Product.objects.all()
+    data=[]
+    for p in products:
+        data.append({
+            'id':p.id,
+            'name':p.name,
+            'price':p.price,
+            'stock':p.stock,
+            'descrip':p.descrip,
+            'image':p.image.url if p.image else ''
+        })
+    return JsonResponse(data,safe=False)
 def index(request):
     user_id = request.session.get('user_id')
     username = request.session.get('username')
