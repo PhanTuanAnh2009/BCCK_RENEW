@@ -8,7 +8,7 @@ from django.contrib.auth import authenticate, login, logout
 import locale
 from .models import CustomUser
 from django.http import JsonResponse
-
+from django.views.decorators.csrf import csrf_exempt
 locale.setlocale(locale.LC_ALL, 'vi_VN.UTF-8')
 
 
@@ -70,6 +70,15 @@ def product_list_api(request):
             'image':p.image.url if p.image else ''
         })
     return JsonResponse(data,safe=False)
+@csrf_exempt
+def product_create_api(request):
+    name=request.POST.get('name')
+    price=request.POST.get('price')
+    stock=request.POST.get('stock',10)
+    image=request.FILES.get('image')
+    #tao doi tuong 
+    product=Product.objects.create(name=name,price=price,stock=stock,image=image)
+    return JsonResponse({'message':'thanh cong',"id":product.id})
 def index(request):
     user_id = request.session.get('user_id')
     username = request.session.get('username')
