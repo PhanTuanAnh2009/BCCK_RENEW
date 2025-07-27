@@ -8,9 +8,13 @@
 
 <div class="container mt-3">
   <div class="row">
-    <div class="  col-md-5">
-     <div c lass="card ">
+    <div class="col-md-5">
+     <div class="card ">
+      {%if product.image%}
         <img class="ratio ratio-1x1" src="{{product.image.url}}" alt="{{product.name}}" >
+        {%else%}
+        <img class="ratio ratio-1x1" src="{%static'store/img/image_placeholder.jpg'%}" alt="{{product.name}}" >
+        {%endif%}
      </div>
     </div>
     <div class=" col-md-7  position-relative d-flex flex-column">
@@ -28,7 +32,7 @@
 
 
 <a href="#"  class="btn btn-success mt-2" style="color:black;background-color:white;border:2px solid black;">Mua ngay</a>
-        
+
 <a href="#"  class="btn btn-success mt-2" style="background-color:black;padding:10px;">Thêm vào giỏ hàng</a>
 
 <p style="color:grey;position: absolute; bottom: 0; right: 0; margin: 0;">Tồn hàng:{{product.stock}}</p>
