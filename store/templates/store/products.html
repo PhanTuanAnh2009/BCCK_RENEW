@@ -5,7 +5,7 @@
 {% block title %}Danh sách sản phẩm{% endblock %}
 
 {% block content %}
-
+      <h2>Xin Chào đây là brach phụ</h2>
         <div style="display:flex; flex-direction: column; align-items: center; margin-bottom:50px; margin-top:20px;">
        <h2 >Danh Sách Sản Phẩm</h2>
        <div class="search-form">
@@ -29,8 +29,12 @@
         <div class="product-container" style="max-height:500px;">
             {% for i in products %}
            <a href="{% url 'product_detail' i.id %}"><div class="product-card" style="height:100%;max-width:400px;" >
+            {% if i.image %}
+              <img class="ratio ratio-1x1" src="{{i.image.url}}" alt="{{i.name}}">
+            {% else %}
+              <img class="ratio ratio-1x1" src="{% static 'store/img/No_Image_Available.jpg' %}" alt="{{i.name}}">
+            {% endif %}
             
-            <img class="ratio ratio-1x1" src="{{i.image.url}}" alt="{{i.name}}" class="ratio ratio-1x1">
            
             <div class="product-info">
                 <h3 >{{i.name}}</h3>
