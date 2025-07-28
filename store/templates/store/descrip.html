@@ -10,11 +10,11 @@
   <div class="row">
     <div class="col-md-5">
      <div class="card ">
-      {%if product.image%}
+      {% if product.image %}
         <img class="ratio ratio-1x1" src="{{product.image.url}}" alt="{{product.name}}" >
-        {%else%}
-        <img class="ratio ratio-1x1" src="{%static'store/img/image_placeholder.jpg'%}" alt="{{product.name}}" >
-        {%endif%}
+        {% else %}
+        <img class="ratio ratio-1x1" src="{% static 'store/img/image_placeholder.jpg'%}" alt="{{product.name}}" >
+        {% endif %}
      </div>
     </div>
     <div class=" col-md-7  position-relative d-flex flex-column">
