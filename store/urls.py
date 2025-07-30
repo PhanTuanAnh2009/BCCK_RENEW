@@ -5,7 +5,7 @@ from django.urls import path,include
 from .views import  *
 urlpatterns = [
     path('',index,name='index'),
-    path('add_to_cart/<int:product_id>/',add_to_cart,name='add_to_cart'),
+    # path('add_to_cart/<int:product_id>/',add_to_cart,name='add_to_cart'),
 
 path('products/', product_list, name='product_list'),
     path('register_custom/', register_view, name='register_custom'),
