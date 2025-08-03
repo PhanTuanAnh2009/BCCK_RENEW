@@ -75,20 +75,40 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         # 'ENGINE': 'django.db.backends.sqlite3',
+#         'ENGINE': 'django.db.backends.postgresql',
+#         # 'NAME': BASE_DIR / 'db.sqlite3',
+
+#         'NAME':'store_db_0rpj',
+#         'USER':'store_db_0rpj_user',
+#         'PASSWORD':'LRp62S3GtTAS2bELYPU0UtrPuJHLVhwO',
+#         'HOST':'dpg-d1ggkqqli9vc73aklppg-a.oregon-postgres.render.com',
+#         'PORT': '5432',  # Đảm bảo có PORT
+#     }
+# }
+# Add these at the top of your settings.py
+import os
+from dotenv import load_dotenv
+from urllib.parse import urlparse, parse_qsl
+
+load_dotenv()
+
+# Replace the DATABASES section of your settings.py with this
+tmpPostgres = urlparse(os.getenv("DATABASE_URL"))
+
 DATABASES = {
     'default': {
-        # 'ENGINE': 'django.db.backends.sqlite3',
         'ENGINE': 'django.db.backends.postgresql',
-        # 'NAME': BASE_DIR / 'db.sqlite3',
-
-        'NAME':'store_db_0rpj',
-        'USER':'store_db_0rpj_user',
-        'PASSWORD':'LRp62S3GtTAS2bELYPU0UtrPuJHLVhwO',
-        'HOST':'dpg-d1ggkqqli9vc73aklppg-a.oregon-postgres.render.com',
-        'PORT': '5432',  # Đảm bảo có PORT
+        'NAME': tmpPostgres.path.replace('/', ''),
+        'USER': tmpPostgres.username,
+        'PASSWORD': tmpPostgres.password,
+        'HOST': tmpPostgres.hostname,
+        'PORT': 5432,
+        'OPTIONS': dict(parse_qsl(tmpPostgres.query)),
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
