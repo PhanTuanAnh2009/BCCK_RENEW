@@ -55,14 +55,24 @@
             let html=''
             data.forEach(item=>{
                 html+=`
-                    <div class="product-card">
-                        <img src="${item.image}" style="border:2px solid black; height:100px; object-fit:cover;border-radius:2px;">    
-                        <h2>${item.name}<h2>
-                        <h3>${item.price}</h3>
-                        <p>${item.stock}</p>
-                        
-                        </div>
-                `
+                 
+                 <div class="product-card"  >
+                        <img class="ratio ratio-1x1" src="${item.image}" alt="${item.name}" >
+                           <div id="product-list" class="product-container">
+
+            
+           
+            <div class="product-info">
+                <h3 >${item.name}</h3>
+                <p class="price">Gía: ${item.price} đồng</p>
+               <div class="stock-info">
+    Tồn hàng: ${item.stock}
+</div>
+            </div>
+          
+        </div>
+           
+        `
             })
             document.getElementById('product-list').innerHTML=html;
         })
