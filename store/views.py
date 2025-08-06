@@ -58,7 +58,7 @@ def product_list(request):
 def index_api(request):
     return render(request,'store/api-learn.html')
 def product_list_api(request):
-    print('Thay hien')
+    
     products=Product.objects.all()
     data=[]
     for p in products:

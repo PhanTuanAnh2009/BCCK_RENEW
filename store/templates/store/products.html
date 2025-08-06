@@ -48,35 +48,27 @@
 </div>
 
 <script>
-   function loadProduct(){
-        fetch('/api/products/')
-        .then(response=>response.json())
-        .then(data=>{
-            let html=''
-            data.forEach(item=>{
-                html+=`
-                 
-                 <div class="product-card"  >
-                        <img class="ratio ratio-1x1" src="${item.image}" alt="${item.name}" >
-                           <div id="product-list" class="product-container">
+function loadProduct() {
+    fetch('/api/products/')
+    .then(response => response.json())
+    .then(data => {
+        let html = '';
+        data.forEach(item => {
+            html += `
+                <div class="product-card" style="height:100%; max-width:400px;">
+                    <img class="ratio ratio-1x1" src="${item.image}" alt="${item.name}">
+                    <div class="product-info">
+                        <h3>${item.name}</h3>
+                        <p class="price">Giá: ${item.price} đồng</p>
+                        <div class="stock-info">Tồn hàng: ${item.stock}</div>
+                    </div>
+                </div>
+            `;
+        });
+        document.getElementById('product-list').innerHTML = html;
+    });
+}
 
-            
-           
-            <div class="product-info">
-                <h3 >${item.name}</h3>
-                <p class="price">Gía: ${item.price} đồng</p>
-               <div class="stock-info">
-    Tồn hàng: ${item.stock}
-</div>
-            </div>
-          
-        </div>
-           
-        `
-            })
-            document.getElementById('product-list').innerHTML=html;
-        })
-    }
 loadProduct()
   function toggleChat() {
     const chat = document.getElementById("chatbot");
