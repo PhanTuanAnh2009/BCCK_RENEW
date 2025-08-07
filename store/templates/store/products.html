@@ -55,7 +55,8 @@ function loadProduct() {
         let html = '';
         data.forEach(item => {
             html += `
-                <div class="product-card" style="height:100%; max-width:400px;">
+                <a href="/product_stt/${item.id}">
+<div class="product-card" style="height:100%; max-width:400px;">
                     <img class="ratio ratio-1x1" src="${item.image}" alt="${item.name}">
                     <div class="product-info">
                         <h3>${item.name}</h3>
@@ -63,6 +64,7 @@ function loadProduct() {
                         <div class="stock-info">Tồn hàng: ${item.stock}</div>
                     </div>
                 </div>
+                </a>
             `;
         });
         document.getElementById('product-list').innerHTML = html;

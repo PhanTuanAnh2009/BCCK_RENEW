@@ -62,10 +62,15 @@ def product_list_api(request):
     products=Product.objects.all()
     data=[]
     for p in products:
+        formatted = locale.currency(p.price, grouping=True)
+        print(formatted)
+        if formatted.endswith(',00 ₫'):
+            formatted = formatted.replace(',00 ₫', ' ₫')
+        p.formatted_price = formatted
         data.append({
             'id':p.id,
             'name':p.name,
-            'price':p.price,
+            'price':p.formatted_price,
             'stock':p.stock,
             'descrip':p.descrip,
             'image':p.image.url if p.image else ''
