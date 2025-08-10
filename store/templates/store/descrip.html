@@ -17,28 +17,34 @@
         {% endif %}
      </div>
     </div>
-    <div class=" col-md-7  position-relative d-flex flex-column">
-      
-      <h2>{{product.name}}</h2>
-      <h3 style="color:red;">{{formatted_price}}</h3>
-    
-      <div class="d-flex align-items-center gap-3 mb-2">
-  
-  <label for="quantity" class="mb-0">Số Lượng</label>
-  
-  <input type="number" id="quantity" name="quantity" class="form-control text-center"
-         style="width: 100px;" value="1" min="1">
-</div>
+    <div style="flex: 1; position: relative; padding-bottom: 25px;">
+        <h2>{{product.name}}</h2>
+        <p style="color:red; font-size: 28px; font-weight: bold;">{{formatted_price}}</p>
 
+        <label for="quantity">Số Lượng</label>
+        <input type="number" id="quantity" name="quantity" value="1" min="1" 
+               style="width: 60px; margin-left: 10px; text-align: center;">
 
-<a href="#"  class="btn btn-success mt-2" style="color:black;background-color:white;border:2px solid black;">Mua ngay</a>
+        <form method="post" action="{% url 'add_to_cart' product.id %}" style="margin-top: 20px;">
+            {% csrf_token %}
+            <button type="submit" name="buy_now"
+                    style="width: 100%; background-color: white; color: black; 
+                           border: 2px solid black; padding: 12px; font-weight: bold; 
+                           border-radius: 5px; margin-bottom: 10px;">
+                MUA NGAY
+            </button>
+            <button type="submit" name="add_to_cart"
+                    style="width: 100%; background-color: black; color: white; 
+                           padding: 12px; border: none; font-weight: bold; 
+                           border-radius: 5px;">
+                THÊM VÀO GIỎ HÀNG
+            </button>
+        </form>
 
-<a href="#"  class="btn btn-success mt-2" style="background-color:black;padding:10px;">Thêm vào giỏ hàng</a>
-
-<p style="color:grey;position: absolute; bottom: 0; right: 0; margin: 0;">Tồn hàng:{{product.stock}}</p>
-
+        <p style="color: grey; position: absolute; bottom: 0; right: 0; margin: 0;">
+            Tồn hàng: {{ product.stock }}
+        </p>
     </div>
-  
   </div>
 </div>
 <div style="margin-left:76px;">

@@ -12,26 +12,26 @@ from django.views.decorators.csrf import csrf_exempt
 locale.setlocale(locale.LC_ALL, 'vi_VN.UTF-8')
 
 
-# def add_to_cart(request, product_id):
-#     product = get_object_or_404(Product, id=product_id)
-#     quantity = int(request.POST.get("quantity", 1))
+def add_to_cart(request, product_id):
+    product = get_object_or_404(Product, id=product_id)
+    quantity = int(request.POST.get("quantity", 1))
 
-#     cart = request.session.get('cart', [])
-#     cart.append({
-#         "id": product.id,
-#         "name": product.name,
-#         "price": int(product.price),
-#         "image_url":product.image.url,
-#         "quantity": quantity,
-#     })
-#     request.session['cart'] = cart
+    cart = request.session.get('cart', [])
+    cart.append({
+        "id": product.id,
+        "name": product.name,
+        "price": int(product.price),
+        "image_url":product.image.url,
+        "quantity": quantity,
+    })
+    request.session['cart'] = cart
 
   
-#     notifications = request.session.get('notifications', [])
-#     notifications.insert(0, f"Bạn đã thêm '{product.name}' vào giỏ hàng.")
-#     request.session['notifications'] = notifications[:5]  # giữ 5 dòng mới nhất
+    notifications = request.session.get('notifications', [])
+    notifications.insert(0, f"Bạn đã thêm '{product.name}' vào giỏ hàng.")
+    request.session['notifications'] = notifications[:5]  # giữ 5 dòng mới nhất
 
-#     return redirect('product_detail', product_id=product.id)
+    return redirect('product_detail', product_id=product.id)
 
 
 def product_list(request):
@@ -58,13 +58,19 @@ def product_list(request):
 def index_api(request):
     return render(request,'store/api-learn.html')
 def product_list_api(request):
+    
     products=Product.objects.all()
     data=[]
     for p in products:
+        formatted = locale.currency(p.price, grouping=True)
+        print(formatted)
+        if formatted.endswith(',00 ₫'):
+            formatted = formatted.replace(',00 ₫', ' ₫')
+        p.formatted_price = formatted
         data.append({
             'id':p.id,
             'name':p.name,
-            'price':p.price,
+            'price':p.formatted_price,
             'stock':p.stock,
             'descrip':p.descrip,
             'image':p.image.url if p.image else ''

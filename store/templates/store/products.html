@@ -26,32 +26,9 @@
   </form>
     </div>
 </div>
-        <div class="product-container" >
-            {% for i in products %}
-           <a href="{% url 'product_detail' i.id %}"><div class="product-card" style="height:100%;max-width:400px;" >
-            {% if i.image %}
-            <img class="ratio ratio-1x1" src="{{i.image.url}}" alt="{{i.name}}" >
-            {% else %}
-            <img class="ratio ratio-1x1" src="{%static 'store/img/image_placeholder.jpg'%}" alt="{{i.name}}" >
-            {% endif %}
+     <div id="product-list" class="product-container">
 
-            
-           
-            <div class="product-info">
-                <h3 >{{i.name}}</h3>
-                <p class="price">Gía: {{i.formatted_price}} đồng</p>
-               <div class="stock-info">
-    Tồn hàng: {{i.stock}}
 </div>
-            </div>
-          
-        </div>
-        </a>
-        {% empty %}
-      <p>Chưa có sản phẩm nào.</p>
-            {% endfor %}
-           
-    </div>
     <div class="chat-toggle" id="chat-toggle" onclick="toggleChat()">
   +
 </div>      
@@ -71,6 +48,30 @@
 </div>
 
 <script>
+function loadProduct() {
+    fetch('/api/products/')
+    .then(response => response.json())
+    .then(data => {
+        let html = '';
+        data.forEach(item => {
+            html += `
+                <a href="/product_stt/${item.id}">
+<div class="product-card" style="height:100%; max-width:400px;">
+                    <img class="ratio ratio-1x1" src="${item.image}" alt="${item.name}">
+                    <div class="product-info">
+                        <h3>${item.name}</h3>
+                        <p class="price">Giá: ${item.price} </p>
+                        <div class="stock-info">Tồn hàng: ${item.stock}</div>
+                    </div>
+                </div>
+                </a>
+            `;
+        });
+        document.getElementById('product-list').innerHTML = html;
+    });
+}
+
+loadProduct()
   function toggleChat() {
     const chat = document.getElementById("chatbot");
     const toggleBtn = document.getElementById("chat-toggle");

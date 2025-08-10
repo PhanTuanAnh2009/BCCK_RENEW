@@ -9,7 +9,7 @@ Thêm sản phẩm
         <div class="add-content" >
          
             <h2 id="add-title">Thêm Sản Phẩm</h2>
-            <form method="POST" enctype="multipart/form-data" id="product-form">
+            <form method="POST" enctype="multipart/form-data" id="product-form" action="/api/products/create">
                 {% csrf_token %}
                 <label for="name">Tên sản phẩm:</label>
                 <input type="text" id="name" name="name" required><br><br>
@@ -36,7 +36,7 @@ Thêm sản phẩm
 
                 <input type="hidden" name="product_id" id="product-id">
                 <button type="submit" id="submit-button">Thêm Sản Phẩm</button>
-            </form>
+             </form>
         </div>
     
 {% endblock content %}
