@@ -5,6 +5,21 @@
 {% block title %}Danh sách sản phẩm{% endblock %}
 
 {% block content %}
+              <!-- products.html -->
+        <div class="carousel-inner">
+            {% for image in carousel_images %}
+            <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                <img src="{{ image.image.url }}" class="d-block w-100" alt="{{ image.caption }}">
+                <div class="carousel-caption d-none d-md-block">
+                    <h5>{{ image.caption }}</h5>
+                </div>
+            </div>
+            {% empty %}
+            <div class="carousel-item active">
+                <img src="{% static 'store/img/default.jpg' %}" class="d-block w-100" alt="No images">
+            </div>
+            {% endfor %}
+        </div>
       
         <div style="display:flex; flex-direction: column; align-items: center; margin-bottom:50px; margin-top:20px;">
        <h2 >Danh Sách Sản Phẩm</h2>

@@ -6,10 +6,23 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 import locale
-from .models import CustomUser
+from .models import CustomUser, CarouselImage
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 locale.setlocale(locale.LC_ALL, 'vi_VN.UTF-8')
+
+
+# @csrf_exempt
+# def product_update_api(request, id):
+#     p=get_object_or_404(Product, id=id)
+#     if request.method=='POST':
+#         data= json.loads(request.body)
+#         p.name= data.get('name', p.name)
+#         p.price= data.get('name', p.price)
+#         p.stock= data.get('name', p.stock)
+#         p.save()
+#         return JsonResponse({'message':'Updated'})
+#     return JsonResponse({'error': 'POST required'}, status=400)
 
 
 def add_to_cart(request, product_id):
@@ -34,6 +47,21 @@ def add_to_cart(request, product_id):
     return redirect('product_detail', product_id=product.id)
 
 
+@login_required
+def carousel_manage(request):
+    if request.method == "POST":
+        if 'upload' in request.POST:
+            image = request.FILES.get("image")
+            caption = request.POST.get("caption", "")
+            CarouselImage.objects.create(image=image, caption=caption)
+        elif 'delete' in request.POST:
+            image_id = request.POST.get("delete")
+            CarouselImage.objects.filter(id=image_id).delete()
+
+    images = CarouselImage.objects.all()
+    return render(request, "store/carousel_manage.html", {"images": images})
+
+
 def product_list(request):
     keyword = request.GET.get('q', '').strip()
     if keyword:
@@ -47,10 +75,14 @@ def product_list(request):
             formatted = formatted.replace(',00 ₫', ' ₫')
         p.formatted_price = formatted
 
-    stars = range(1, 6)   
+    stars = range(1, 6)
+    # categories=Product.objects.values_list('category', flat=True)
+    carousel_images = CarouselImage.objects.filter(is_active=True)  
     return render(request, 'store/products.html', {
         'products': products,
         'stars': stars,
+        # 'categories': categories,
+        'carousel_images': carousel_images
     })
 
 
