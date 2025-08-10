@@ -6,7 +6,7 @@ Thêm sản phẩm
 {% endblock title %}
 {% block content %}
  
-        <div class="add-content" >
+        <div class="add-content" id="editproduct">
          
             <h2 id="add-title">Thêm Sản Phẩm</h2>
             <form method="POST" enctype="multipart/form-data" id="product-form" action="/api/products/create">
@@ -38,5 +38,85 @@ Thêm sản phẩm
                 <button type="submit" id="submit-button">Thêm Sản Phẩm</button>
              </form>
         </div>
-    
+        <div id="product-list" class="product-container">
+
+</div>
+    <script>
+        function formatVND(n){
+  n=Number(n)
+  return n.toLocaleString('vi-VN')+'đ'
+}
+    function loadProduct(){
+        fetch('/api/products/')
+        .then(response=>response.json())
+        .then(data=>{
+            let html=''
+            data.forEach(item=>{
+                html+=`
+                    \
+<div class="product-card" style="height:100%; max-width:400px;">
+                    <img class="ratio ratio-1x1" src="${item.image}" alt="${item.name}">
+                    <div class="product-info">
+                        <h3>${item.name}</h3>
+                        <p class="price">Giá: ${formatVND(item.price)} </p>
+                    <div class="button" style="display:flex;flex-direction:row;justify-content:center; margin-bottom:5px;">
+                        <button id="fix-product" class="btn btn-primary" style="margin-right:20px;"  onclick="showEdit(${item.id},'${item.name}',${item.price},${item.stock})">Sua</button>
+                    <button id="del-product" class="btn btn-danger" >Xoa </button>
+                    </div>    
+                    <div class="stock-info">Tồn hàng: ${item.stock}</div>
+                    </div>
+                    
+                </div>
+                
+                `
+            })
+            document.getElementById('product-list').innerHTML=html;
+        })
+    }
+    function addProduct(){
+        let formData=new FormData()
+        formData.append("name",document.getElementById("name").value)
+        formData.append("price",document.getElementById("price").value)
+        formData.append("stock",document.getElementById("stock").value)
+        let imageInput=document.getElementById("image")
+        if(image.files.length>0){
+            formData.append('image',image)
+        }
+        fetch("/api/products/create/",{
+            method:"POST",
+            body:formData
+        })
+        .then(res=>res.json())
+        .then(()=>loadProduct())
+    }
+    loadProduct()
+    function showEdit(id, name, price, stock){
+        console.log("hehe")
+        document.getElementById("name").value=name
+        document.getElementById("price").value=price
+        document.getElementById("stock").value=stock
+        window.editId=id
+        document.getElementById('edit-btn')?.remove()
+        let btn=document.createElement('button')
+        btn.id='edit-btn'
+        btn.className='btn btn-danger'
+        btn.innerText='Cap nhat'
+        btn.onclick=function(){
+            editProduct(id)
+        }
+        document.getElementById('editproduct').appendChild(btn)
+        }
+        function editProduct(id){
+            let name=document.getElementById('name').value
+            let price=document.getElementById('price').value
+            let stock=document.getElementById('stock').value
+            fetch(`api/products/update/${id}/`,{
+                method:'POST',
+                headers:{'Content-Type':'application/json'},
+                body:JSON.stringify({name,price,stock})
+            })
+            .then(res=>res.json())
+            .then(()=>loadProduct())
+        }
+</script>
 {% endblock content %}

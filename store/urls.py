@@ -17,6 +17,6 @@ path('login_custom/',login_view, name='login_custom'),
     path('product_stt/<int:product_id>/',product_detail, name='product_detail'),
     # path('add-to-cart/<int:product_id>/',add_to_cart, name='add_to_cart'),
     path('api/products/',product_list_api,name="product_list_api"),
-    path('api/products/create',product_create_api,name='product_create_api')
-  
+    path('api/products/create',product_create_api,name='product_create_api'),
+    path('api/products/update',product_update_api,name='product_update_api')
 ]+static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
