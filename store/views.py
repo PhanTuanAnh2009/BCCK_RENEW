@@ -75,14 +75,24 @@ def product_list_api(request):
         })
     return JsonResponse(data,safe=False)
 @csrf_exempt
+def product_delete_api(request,id):
+    p=get_object_or_404(request,id)
+    if request.method=='POST':
+        p.delete()
+        return JsonResponse({'message':'Deleted'})
+    return JsonResponse({'error':'POST required'},status=400)
+@csrf_exempt
 def product_update_api(request,id):
     p = get_object_or_404(Product,id=id)
     if request.method=='POST':
-        data = json.loads(request.body)
-        p.name=data.get('name',p.name)
-        p.price=data.get('price',p.price)
-       
-        p.stock=data.get('stock',p.stock)
+        print("???")
+        print(request.POST)
+        p.name=request.POST.get('name',p.name)
+        p.price=request.POST.get('price',p.price)
+        p.stock=request.POST.get('stock',p.stock)
+        print(request.POST.get('price'))
+        if 'image' in request.FILES:
+            p.image=request.FILES['image']
         p.save()
         return JsonResponse({'message':'Updated'})
     return JsonResponse({'error':'POST required'},status=400)

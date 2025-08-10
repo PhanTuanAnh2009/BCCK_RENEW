@@ -78,6 +78,7 @@ Thêm sản phẩm
         formData.append("name",document.getElementById("name").value)
         formData.append("price",document.getElementById("price").value)
         formData.append("stock",document.getElementById("stock").value)
+
         let imageInput=document.getElementById("image")
         if(image.files.length>0){
             formData.append('image',image)
@@ -99,6 +100,7 @@ Thêm sản phẩm
         document.getElementById('edit-btn')?.remove()
         let btn=document.createElement('button')
         btn.id='edit-btn'
+        btn.style='margin-top:10px;'
         btn.className='btn btn-danger'
         btn.innerText='Cap nhat'
         btn.onclick=function(){
@@ -107,13 +109,21 @@ Thêm sản phẩm
         document.getElementById('editproduct').appendChild(btn)
         }
         function editProduct(id){
-            let name=document.getElementById('name').value
-            let price=document.getElementById('price').value
-            let stock=document.getElementById('stock').value
-            fetch(`api/products/update/${id}/`,{
+            let formData=new FormData()
+        formData.append("name",document.getElementById("name").value)
+        formData.append("price",document.getElementById("price").value)
+        formData.append("stock",document.getElementById("stock").value)
+        console.log(document.getElementById("name").value)
+        console.log(document.getElementById("price").value)
+        let imageInput=document.getElementById("image")
+        if(image.files.length>0){
+            formData.append('image',image)
+        }
+            
+            fetch(`/api/products/update/${id}/`,{
                 method:'POST',
                 headers:{'Content-Type':'application/json'},
-                body:JSON.stringify({name,price,stock})
+                body:formData
             })
             .then(res=>res.json())
             .then(()=>loadProduct())
