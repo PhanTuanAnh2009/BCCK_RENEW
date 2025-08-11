@@ -78,7 +78,6 @@ Thêm sản phẩm
         formData.append("name",document.getElementById("name").value)
         formData.append("price",document.getElementById("price").value)
         formData.append("stock",document.getElementById("stock").value)
-
         let imageInput=document.getElementById("image")
         if(image.files.length>0){
             formData.append('image',image)
@@ -109,16 +108,14 @@ Thêm sản phẩm
         document.getElementById('editproduct').appendChild(btn)
         }
         function editProduct(id){
-            let formData=new FormData()
-        formData.append("name",document.getElementById("name").value)
-        formData.append("price",document.getElementById("price").value)
-        formData.append("stock",document.getElementById("stock").value)
-        console.log(document.getElementById("name").value)
-        console.log(document.getElementById("price").value)
-        let imageInput=document.getElementById("image")
-        if(image.files.length>0){
-            formData.append('image',image)
-        }
+            let formData= new FormData()
+            formData.append('name',document.getElementById('name').value)
+            formData.append('price',document.getElementById('price').value)
+            formData.append('stock',document.getElementById('stock').value)
+            let getImage=document.getElementById('image').files[0]
+            if (getImage){
+                formData.append('image',getImage)
+            }
             
             fetch(`/api/products/update/${id}/`,{
                 method:'POST',
