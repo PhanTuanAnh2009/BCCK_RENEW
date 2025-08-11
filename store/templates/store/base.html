@@ -54,7 +54,7 @@
                   <li><a class="dropdown-item" href="{% url 'logout_custom' %}">Đăng xuất</a></li>
                 </ul>
               </div>
-              <!-- Icon chuông thông báo -->
+              
               {% comment %} <a href="#" class="btn btn-light position-relative me-3">
                 <i class="bi bi-bell"></i>
                 <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
@@ -82,7 +82,7 @@
               </div>
               
 
-              <!-- Icon giỏ hàng -->
+          
               <a href="#" class="btn btn-light position-relative me-3" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart">
                 <i class="bi bi-cart"></i>
                 <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-success">
@@ -99,7 +99,7 @@
         </div>
       </div>
     </nav>
-    <!-- Offcanvas giỏ hàng -->
+  
     <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasCart" aria-labelledby="offcanvasCartLabel">
       <div class="offcanvas-header">
         <h5 id="offcanvasCartLabel">Giỏ hàng</h5>
@@ -127,13 +127,11 @@
 
   </header>
 
-  <!-- Nơi chứa nội dung riêng từng trang -->
   <main class="flex-grow-1">
     {% block content %}
     {% endblock content %}
   </main>
 
-  <!-- FOOTER chung -->
   <footer class="bg-white border-top py-5">
     <div class="container-fluid px-4 text-center">
       <p>© 2024 Company, Inc. All rights reserved.</p>

@@ -9,6 +9,7 @@ import locale
 from .models import CustomUser
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
+import json
 locale.setlocale(locale.LC_ALL, 'vi_VN.UTF-8')
 
 
@@ -29,7 +30,7 @@ def add_to_cart(request, product_id):
   
     notifications = request.session.get('notifications', [])
     notifications.insert(0, f"Bạn đã thêm '{product.name}' vào giỏ hàng.")
-    request.session['notifications'] = notifications[:5]  # giữ 5 dòng mới nhất
+    request.session['notifications'] = notifications[:5] 
 
     return redirect('product_detail', product_id=product.id)
 
@@ -62,28 +63,52 @@ def product_list_api(request):
     products=Product.objects.all()
     data=[]
     for p in products:
-        formatted = locale.currency(p.price, grouping=True)
-        print(formatted)
-        if formatted.endswith(',00 ₫'):
-            formatted = formatted.replace(',00 ₫', ' ₫')
-        p.formatted_price = formatted
+        
         data.append({
             'id':p.id,
             'name':p.name,
-            'price':p.formatted_price,
+            'price':p.price,
+          
             'stock':p.stock,
             'descrip':p.descrip,
             'image':p.image.url if p.image else ''
         })
     return JsonResponse(data,safe=False)
 @csrf_exempt
+
+
+def product_delete_api(request,id):
+    p=get_object_or_404(Product,id=id)
+    if request.method=='POST':
+        p.delete()
+        return JsonResponse({'message':'Deleted'})
+    return JsonResponse({'error' : 'POST required'},status=400)
+@csrf_exempt
+def product_update_api(request,id):
+    p = get_object_or_404(Product,id=id)
+    if request.method=='POST':
+        print("???")
+        print(request.POST)
+        p.name=request.POST.get('name',p.name)
+        p.price=request.POST.get('price',p.price)
+       
+        p.stock=request.POST.get('stock',p.stock)
+        print(request.POST.get('price'))
+        if 'image' in request.FILES:
+            p.image=request.FILES['image']
+        p.save()
+        return JsonResponse({'message':'Updated'})
+    return JsonResponse({'error':'POST required'},status=400)
+@csrf_exempt
 def product_create_api(request):
     name=request.POST.get('name')
     price=request.POST.get('price')
     stock=request.POST.get('stock',10)
+    descrip=request.POST.get('descrip')
     image=request.FILES.get('image')
+    
     #tao doi tuong 
-    product=Product.objects.create(name=name,price=price,stock=stock,image=image)
+    product=Product.objects.create(name=name,price=price,stock=stock,descrip=descrip,image=image)
     return JsonResponse({'message':'thanh cong',"id":product.id})
 def index(request):
     user_id = request.session.get('user_id')
