@@ -61,7 +61,7 @@ Thêm sản phẩm
                         <p class="price">Giá: ${formatVND(item.price)} </p>
                     <div class="button" style="display:flex;flex-direction:row;justify-content:center; margin-bottom:5px;">
                         <button id="fix-product" class="btn btn-primary" style="margin-right:20px;"  onclick="showEdit(${item.id},'${item.name}',${item.price},${item.stock})">Sua</button>
-                    <button id="del-product" class="btn btn-danger" >Xoa </button>
+                    <button id="del-product" class="btn btn-danger" onclick="deleted(${item.id})">Xoa </button>
                     </div>    
                     <div class="stock-info">Tồn hàng: ${item.stock}</div>
                     </div>
@@ -119,7 +119,24 @@ Thêm sản phẩm
             
             fetch(`/api/products/update/${id}/`,{
                 method:'POST',
-                headers:{'Content-Type':'application/json'},
+                
+                body:formData
+            })
+            .then(res=>res.json())
+            .then(()=>loadProduct())
+        }
+        function deleted(id){
+            let formData= new FormData()
+            formData.append('name',document.getElementById('name').value)
+            formData.append('price',document.getElementById('price').value)
+            formData.append('stock',document.getElementById('stock').value)
+            let getImage=document.getElementById('image').files[0]
+            if (getImage){
+                formData.append('image',getImage)
+            }
+            fetch(`/api/products/delete/${id}/`,{
+                method:'POST',
+                
                 body:formData
             })
             .then(res=>res.json())

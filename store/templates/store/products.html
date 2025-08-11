@@ -48,6 +48,10 @@
 </div>
 
 <script>
+   function formatVND(n){
+  n=Number(n)
+  return n.toLocaleString('vi-VN')+'đ'
+}
 function loadProduct() {
     fetch('/api/products/')
     .then(response => response.json())
@@ -60,7 +64,7 @@ function loadProduct() {
                     <img class="ratio ratio-1x1" src="${item.image}" alt="${item.name}">
                     <div class="product-info">
                         <h3>${item.name}</h3>
-                        <p class="price">Giá: ${item.price} </p>
+                        <p class="price">Giá: ${ formatVND(item.price)} </p>
                         <div class="stock-info">Tồn hàng: ${item.stock}</div>
                     </div>
                 </div>
