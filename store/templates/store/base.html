@@ -107,10 +107,10 @@
       </div>
       <div class="offcanvas-body">
         {% if request.session.cart %}
-          {% for item in request.session.cart %}
+            {% for item in request.session.cart %}
             <div class="d-flex mb-3 align-items-center border-bottom pb-2">
               <div class="me-3">
-                <img src="{{item.image_url}}" width="50" height="50" class="rounded" />
+                <img src="{{item.image_url}}" width="50" height="50" class="rounded"/>
               </div>
               <div>
                 <strong>{{ item.name }}</strong><br>

@@ -1,4 +1,3 @@
-
 {% extends 'store/base.html' %}
 {% load static %}
 
@@ -20,16 +19,14 @@
     <div style="flex: 1; position: relative; padding-bottom: 25px;">
         <h2>{{product.name}}</h2>
         <p style="color:red; font-size: 28px; font-weight: bold;">{{formatted_price}}</p>
-<form method="post" action="{% url 'add_to_cart' product.id %}" style="margin-top: 20px;">
+        <form method="post" action="{% url 'add_to_cart' product.id %}" style="margin-top: 20px;">
             {% csrf_token %}
         <label for="quantity">Số Lượng</label>
-        <input type="number" id
-        ="quantity" name="quantity" value="1" min="1" 
-               style="width: 60px; margin-left: 10px; text-align: center; margin-bottom: 15px;">
+        <input type="number" id="quantity" name="quantity" value="1" min="1" style="width: 60px; margin-left: 10px; text-align: center; margin-bottom: 15px;">
 
         
-            <button type="submit" name="buy_now"
-                    style="width: 100%; background-color: white; color: black; 
+        <button type="submit" name="buy_now" 
+                           style="width: 100%; background-color: white; color: black; 
                            border: 2px solid black; padding: 12px; font-weight: bold; 
                            border-radius: 5px; margin-bottom: 10px;">
                 MUA NGAY
