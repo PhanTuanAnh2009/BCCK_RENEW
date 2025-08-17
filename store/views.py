@@ -48,7 +48,7 @@ def add_to_cart(request, product_id):
     return redirect('product_detail', product_id=product.id)
 
 
-@login_required
+
 def carousel_manage(request):
     if request.method == "POST":
         if 'upload' in request.POST:
