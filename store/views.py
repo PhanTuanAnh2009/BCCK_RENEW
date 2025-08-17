@@ -13,6 +13,8 @@ import json
 locale.setlocale(locale.LC_ALL, 'vi_VN.UTF-8')
 
 
+   
+
 def add_to_cart(request, product_id):
     product = get_object_or_404(Product, id=product_id)
     quantity = int(request.POST.get("quantity", 1))
@@ -32,7 +34,7 @@ def add_to_cart(request, product_id):
     notifications.insert(0, f"Bạn đã thêm '{product.name}' vào giỏ hàng.")
     request.session['notifications'] = notifications[:5] 
 
-    return redirect('product_detail', product_id=product.id)
+    return render(request, 'store/pay.html')
 
 
 def product_list(request):
@@ -76,6 +78,22 @@ def product_list_api(request):
     return JsonResponse(data,safe=False)
 @csrf_exempt
 
+@csrf_exempt
+def thanhtoan(request):
+    products=Product.objects.all()
+    data=[]
+    for p in products:
+        
+        data.append({
+            'id':p.id,
+            'name':p.name,
+            'price':p.price,
+            'quantity':p.quantity,    
+            'stock':p.stock,
+            'descrip':p.descrip,
+            'image':p.image.url if p.image else ''
+        })
+    return JsonResponse(data,safe=False)
 
 def product_delete_api(request,id):
     p=get_object_or_404(Product,id=id)

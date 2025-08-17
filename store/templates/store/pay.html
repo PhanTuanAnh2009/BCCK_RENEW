@@ -1,0 +1,48 @@
+{%extends 'store/base.html'%}
+{%load static %}
+{% block title %}
+Thanh toan
+{%endblock title%}
+{%block content%}
+<div class="container">
+    <table class="table">
+  <thead>
+    <tr>
+      
+      <th scope="col" >Sản Phẩm</th>
+      <th scope="col">Đơn Giá</th>
+      <th scope="col">Số Lượng </th>
+      <th scope="col">Số tiền</th>
+      <th scope="col">Thao Tác</th>
+    </tr>
+  </thead>
+  <tbody id="product-list">
+    
+  </tbody>
+  </table>
+</div>
+<script>
+    function loadProduct() {
+    fetch('/api/products/')
+    .then(response => response.json())
+    .then(data => {
+        let html = '';
+        data.forEach(item => {
+            html += `
+                <tr>
+      
+      <td><img  src="${item.image}" alt="${item.name}" style="width:55px;height:60px;">${item.name}</td>
+  
+      <td style="padding-top:20px;padding:auto;">${item.price}</td>
+      <td style="padding-top:20px;padding:auto;">?</td>
+      <td style="padding-top:20px;">${item.price}</td>
+      <td><a class="btn btn-danger">X</a></td>              
+      </tr>
+            `;
+        });
+        document.getElementById('product-list').innerHTML = html;
+    });
+}
+loadProduct()
+</script>
+{%endblock content%}
