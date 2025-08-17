@@ -8,8 +8,8 @@ Thanh toan
     <table class="table">
   <thead>
     <tr>
-      
-      <th scope="col" >Sản Phẩm</th>
+
+      <th scope="col" ><input style="margin-right:5px;"class="form-check-input" type="checkbox" id="checkAll">Sản Phẩm</th>
       <th scope="col">Đơn Giá</th>
       <th scope="col">Số Lượng </th>
       <th scope="col">Số tiền</th>
@@ -22,8 +22,14 @@ Thanh toan
   </table>
 </div>
 <script>
+      function formatVND(n){
+  n=Number(n)
+  return n.toLocaleString('vi-VN')+'đ'
+
+
+}
     function loadProduct() {
-    fetch('/api/products/')
+    fetch('/api/thanhtoan/')
     .then(response => response.json())
     .then(data => {
         let html = '';
@@ -31,12 +37,12 @@ Thanh toan
             html += `
                 <tr>
       
-      <td><img  src="${item.image}" alt="${item.name}" style="width:55px;height:60px;">${item.name}</td>
+      <td style="display:flex;align-items:center;"><input class="form-check-input child-checkbox" type="checkbox" id="product1" ><img  src="${item.image}" alt="${item.name}" style="width:55px;height:60px;">${item.name}</td>
   
-      <td style="padding-top:20px;padding:auto;">${item.price}</td>
-      <td style="padding-top:20px;padding:auto;">?</td>
-      <td style="padding-top:20px;">${item.price}</td>
-      <td><a class="btn btn-danger">X</a></td>              
+      <td style="padding-top:20px;padding:auto;">${formatVND(item.price)}</td>
+      <td style="padding-top:20px;padding:auto;">${item.quantity}</td>
+      <td style="padding-top:20px">${formatVND(item.price)}</td>
+      <td ><a class="btn btn-danger" style="margin-left:15px;">X</a></td>              
       </tr>
             `;
         });
@@ -44,5 +50,11 @@ Thanh toan
     });
 }
 loadProduct()
+$('#checkAll').on('change', function() {
+      $('.child-checkbox').prop('checked', this.checked);
+    });
+    $('.child-checkbox').on('change', function() {
+      $('#checkAll').prop('checked', $('.child-checkbox:checked').length === $('.child-checkbox').length);
+    });
 </script>
 {%endblock content%}

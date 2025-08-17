@@ -8,7 +8,7 @@ import hashlib
 
 class Product(models.Model):
     name=models.CharField(max_length=100)
-
+    quantity=models.IntegerField(default=1)
     price=models.DecimalField(max_digits=10,decimal_places=2)
     stock=models.IntegerField(default=10)
     descrip=models.CharField(max_length=10000,blank=True,null=True)

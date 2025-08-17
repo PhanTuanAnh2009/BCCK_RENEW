@@ -19,6 +19,6 @@ path('login_custom/',login_view, name='login_custom'),
     path('api/products/',product_list_api,name="product_list_api"),
     path('api/products/create',product_create_api,name='product_create_api'),
     path('api/products/update/<int:id>/',product_update_api,name='product_update_api'),
-    path('api/products/delete/<int:id>/',product_delete_api,name='product_delete_api')
-    path('api/thanhtoan/')
+    path('api/products/delete/<int:id>/',product_delete_api,name='product_delete_api'),
+    path('api/thanhtoan/',thanhtoan,name="thanhtoan")
 ]+static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
