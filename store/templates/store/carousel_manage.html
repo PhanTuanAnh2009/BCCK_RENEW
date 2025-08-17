@@ -1,0 +1,28 @@
+<!-- carousel_manage.html -->
+{% extends 'store/base.html' %}
+{% block content %}
+<div class="container py-4">
+    <h2>Quản lý ảnh Carousel</h2>
+
+    <form method="POST" enctype="multipart/form-data" class="mb-3">
+        {% csrf_token %}
+        <input type="file" name="image" required>
+        <input type="text" name="caption" placeholder="Chú thích">
+        <button type="submit" name="upload" class="btn btn-success">Tải lên</button>
+    </form>
+
+    <div class="row">
+        {% for img in images %}
+        <div class="col-md-3 text-center">
+            <img src="{{ img.image.url }}" class="img-fluid mb-2">
+            <p>{{ img.caption }}</p>
+            <form method="post" style="display:inline;">
+                {% csrf_token %}
+                <input type="hidden" name="delete" value="{{ img.id }}">
+                <button type="submit" class="btn btn-sm btn-danger">Xóa</button>
+            </form>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
