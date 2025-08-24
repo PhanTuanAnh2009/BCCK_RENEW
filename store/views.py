@@ -23,6 +23,7 @@ def add_to_cart(request, product_id):
     cart.append({
         "id": product.id,
         "name": product.name,
+        "quantity":product.quantity,
         "price": int(product.price),
         "image_url":product.image.url,
         "quantity": quantity,
@@ -32,7 +33,7 @@ def add_to_cart(request, product_id):
   
     notifications = request.session.get('notifications', [])
     notifications.insert(0, f"Bạn đã thêm '{product.name}' vào giỏ hàng.")
-    request.session['notifications'] = notifications[:5] 
+    request.session['notifications'] = notifications[:10] 
 
     return render(request, 'store/pay.html')
 
