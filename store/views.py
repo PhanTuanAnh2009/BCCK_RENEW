@@ -62,7 +62,11 @@ def index_api(request):
     return render(request,'store/api-learn.html')
 def product_list_api(request):
     
-    products=Product.objects.all()
+    keyword = request.GET.get('q', '').strip()
+    if keyword:
+        products = Product.objects.filter(name__icontains=keyword)
+    else:
+        products = Product.objects.all()
     data=[]
     for p in products:
         

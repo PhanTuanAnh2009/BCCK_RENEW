@@ -53,7 +53,8 @@
   return n.toLocaleString('vi-VN')+'đ'
 }
 function loadProduct() {
-    fetch('/api/products/')
+  let query = new URLSearchParams(window.location.search).get('q') || '';
+    fetch('/api/products/?q=' + encodeURIComponent(query))
     .then(response => response.json())
     .then(data => {
         let html = '';
