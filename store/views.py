@@ -284,14 +284,14 @@ def sanpham(request):
 
     return render(request, 'store/nhapsp.html', context)
 
-# def timKiem(request)  :
-#     keyword = request.GET.get('q', '').strip()
+def timKiem(request)  :
+    keyword = request.GET.get('q', '').strip()
 
-#     if keyword:
-#         products = Product.objects.filter(name__icontains=keyword)
-#     else:
-#         products = Product.objects.all()
+    if keyword:
+        products = Product.objects.filter(name__icontains=keyword)
+    else:
+        products = Product.objects.all()
 
-#     return render(request, 'products.html', {
-#         'products': products,
-#     })
+    return render(request, 'products.html', {
+        'products': products,
+    })
