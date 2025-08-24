@@ -7,9 +7,9 @@ urlpatterns = [
     path('',index,name='index'),
     path('add_to_cart/<int:product_id>/',add_to_cart,name='add_to_cart'),
 
-path('products/', product_list, name='product_list'),
+    path('products/', product_list, name='product_list'),
     path('register_custom/', register_view, name='register_custom'),
-path('login_custom/',login_view, name='login_custom'),
+    path('login_custom/',login_view, name='login_custom'),
     path('logout_custom/',logout_view, name='logout_custom'),
     path('api-learn/',index_api,name='index_api'),
     path('home/',home,name='home'),
